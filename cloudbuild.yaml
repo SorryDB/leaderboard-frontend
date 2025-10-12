@@ -1,0 +1,9 @@
+steps:
+- name: "gcr.io/cloud-builders/docker"
+  args:
+  - build
+  - "--tag=gcr.io/$PROJECT_ID/sorrydb-leaderboard-frontend"
+  - "--cache-from', 'gcr.io/$PROJECT_ID/[IMAGE_NAME]:latest"
+  - .
+images:
+- "gcr.io/$PROJECT_ID/sorrydb-leaderboard-frontend"
