@@ -1,6 +1,6 @@
 import { getLeaderboard, API_BASE_URL } from './api.js';
 
-const REFRESH_INTERVAL = 60000;
+const REFRESH_INTERVAL = 120000;
 const state = {
     all: [],
     filtered: [],
