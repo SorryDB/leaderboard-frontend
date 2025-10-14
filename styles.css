@@ -8,29 +8,86 @@ body {
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: #e5e9f2;
     min-height: 100vh;
-    padding: 32px 20px;
+    color: #1f2933;
+}
+
+main {
+    padding-bottom: 72px;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 24px;
 }
 
-header {
-    text-align: center;
-    color: #1f2933;
-    margin-bottom: 32px;
-    padding: 8px;
+.site-header {
+    background: #ffffff;
+    border-bottom: 1px solid #d3dae4;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(8px);
 }
 
-h1 {
-    font-size: 2.5em;
-    margin-bottom: 8px;
+.nav-container {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.subtitle {
-    font-size: 1em;
-    color: #52606d;
+.brand {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1d4ed8;
+    text-decoration: none;
+}
+
+.primary-nav {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.primary-nav a {
+    text-decoration: none;
+    font-weight: 500;
+    color: #394150;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.primary-nav a:hover,
+.primary-nav a:focus {
+    background: rgba(37, 99, 235, 0.1);
+    color: #1d4ed8;
+}
+
+.primary-nav a[aria-current="page"] {
+    background: rgba(37, 99, 235, 0.12);
+    color: #1d4ed8;
+}
+
+.hero {
+    padding: 72px 0 48px;
+}
+
+.hero.hero-compact {
+    padding: 48px 0 32px;
+}
+
+.hero-title {
+    font-size: 2.75rem;
+    line-height: 1.2;
+    margin-bottom: 16px;
+}
+
+.hero-lead {
+    font-size: 1.05rem;
+    color: #4b5563;
+    line-height: 1.6;
 }
 
 .leaderboard-card {
@@ -225,9 +282,65 @@ td.challenges {
     color: #7b8794;
 }
 
+.section {
+    padding: 64px 0;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.section-copy {
+    color: #4b5563;
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+.page-section {
+    padding: 24px 0;
+}
+
+.page-section h2 {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+}
+
+.page-section p {
+    color: #4b5563;
+    line-height: 1.6;
+}
+
+.container.narrow {
+    max-width: 720px;
+}
+
+.content-list {
+    list-style: disc;
+    margin: 16px 0 0 20px;
+    color: #4b5563;
+    line-height: 1.6;
+}
+
 @media (max-width: 768px) {
-    h1 {
-        font-size: 1.8em;
+    .nav-container {
+        flex-direction: column;
+        height: auto;
+        gap: 12px;
+        padding: 16px 0;
+    }
+
+    .primary-nav {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .hero {
+        padding: 64px 0 48px;
+    }
+
+    .hero-title {
+        font-size: 2.2rem;
     }
 
     .controls {
