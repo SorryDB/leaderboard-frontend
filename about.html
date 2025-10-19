@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About SorryDB</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28' font-family='sans-serif' font-weight='700'>⊢</text></svg>">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body id="top">
+    <header class="site-header">
+        <div class="container nav-container">
+            <a href="index.html" class="brand">SorryDB</a>
+            <nav class="primary-nav">
+                <a href="index.html#leaderboard">Leaderboard</a>
+                <a href="about.html" aria-current="page">About</a>
+                <a href="statistics.html">Statistics</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero hero-compact">
+            <div class="container narrow">
+                <h1 class="hero-title">About SorryDB</h1>
+                <p class="hero-lead">
+                    SorryDB aims to bridge the gap between automated formal proof research and day-to-day mathematical
+                    practice. It supplies Lean 4 users with the infrastructure needed to develop, test, and deploy AI
+                    proof agents against real theorems collected from public repositories.
+                </p>
+            </div>
+        </section>
+        <section class="page-section">
+            <div class="container narrow">
+                <h2>Project Overview</h2>
+                <p>
+                    At its core, SorryDB is a continuously refreshed dataset of Lean 4 <em>sorry</em> statements drawn from
+                    public projects. Each entry records the repository, commit, Lean version, and precise location of the
+                    unfinished proof so that anyone can reproduce the challenge locally. Template agents attempt to fill
+                    these proof obligations, while an independent verifier checks that proposed solutions are correct.
+                </p>
+                <p>
+                    The long-term vision is to host an always-on sorry-filling competition with a public leaderboard. For
+                    background on the motivation, philosophy, and roadmap, refer to <code>ABOUT.md</code> in the main
+                    repository.
+                </p>
+            </div>
+        </section>
+
+        <section class="page-section">
+            <div class="container narrow">
+                <h2>Resources</h2>
+                <ul class="content-list">
+                    <li><a href="https://github.com/SorryDB/SorryDB" target="_blank" rel="noreferrer">GitHub repository</a></li>
+                    <li><a href="https://leanprover.zulipchat.com/#narrow/channel/219941-Machine-Learning-for-Theorem-Proving/topic/SorryDB.20project/with/539975666" target="_blank" rel="noreferrer">Zulip discussion thread</a></li>
+                    <li><a href="https://colab.research.google.com/github/SorryDB/SorryDB/blob/master/doc/Introduction_to_the_SorryDB_Project.ipynb" target="_blank" rel="noreferrer">Introductory Google Colab notebook</a></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

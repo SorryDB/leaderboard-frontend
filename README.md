@@ -19,7 +19,7 @@ A simple, responsive HTML/JavaScript frontend for displaying the SorryDB leaderb
 
 ## Configuration
 
-Before running, update the API URL in `script.js`:
+Before running, update the API URL in `scripts/api.js`:
 
 ```javascript
 const API_BASE_URL = 'http://localhost:8000'; // Change this to your API URL
@@ -62,15 +62,17 @@ npx http-server -p 8080
 Copy the files to your nginx html directory:
 
 ```bash
-cp index.html script.js /usr/share/nginx/html/
+cp index.html styles.css /usr/share/nginx/html/
+cp -r scripts /usr/share/nginx/html/
 ```
 
 ## Development
 
 To modify the leaderboard:
 
-1. Edit `index.html` for structure and styling
-2. Edit `script.js` for functionality and API integration
+1. Edit `index.html` for markup
+2. Edit `styles.css` for styling
+3. Edit `scripts/main.js` and `scripts/api.js` for functionality and API integration
 3. Refresh your browser to see changes
 
 ## API Endpoint
