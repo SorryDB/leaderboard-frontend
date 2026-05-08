@@ -17,22 +17,31 @@ A simple, responsive HTML/JavaScript frontend for displaying the SorryDB leaderb
 - Or any web server (nginx, Apache, Python's http.server, etc.)
 - SorryDB backend API running and accessible
 
-## Configuration
+## Modes
 
-Before running, update the API URL in `scripts/api.js`:
+The frontend can run in one of two modes, selected by a build-time flag:
 
-```javascript
-const API_BASE_URL = 'http://localhost:8000'; // Change this to your API URL
-```
+- **`static`** (default) — loads agents from `data/leaderboard.json` bundled with the site. No backend required; suitable for static hosting (GitHub Pages, plain nginx, etc.). Auto-refresh is disabled.
+- **`api`** — fetches live data from the SorryDB backend at the URL set in `scripts/api.js` (`API_BASE_URL`). Auto-refresh runs every 2 minutes.
 
-Replace `http://localhost:8000` with the actual URL of your SorryDB backend API.
+The active mode lives in `scripts/config.js` (`export const MODE = '...'`). The Docker build rewrites this file based on the `MODE` build-arg. For local non-Docker development, edit `scripts/config.js` directly.
+
+### Editing the static dataset
+
+`data/leaderboard.json` is an array of `{agent_id, agent_name, completed_challenges}` entries. Rank is computed client-side from `completed_challenges` (descending), so you only need to maintain the score field when adding/updating agents.
 
 ## Running with Docker
 
-### Build the Docker image:
+### Build the Docker image (static mode, default):
 
 ```bash
 docker build -t sorrydb-leaderboard-frontend .
+```
+
+### Build in API mode:
+
+```bash
+docker build --build-arg MODE=api -t sorrydb-leaderboard-frontend .
 ```
 
 ### Run the container:
@@ -77,7 +86,7 @@ To modify the leaderboard:
 
 ## API Endpoint
 
-The frontend expects the backend API to expose a `/leaderboard` endpoint that returns JSON in the following format:
+In `api` mode, the frontend expects the backend API to expose a `/leaderboard` endpoint that returns JSON in the following format (the same shape `data/leaderboard.json` uses, plus a precomputed `rank`):
 
 ```json
 [
@@ -92,7 +101,7 @@ The frontend expects the backend API to expose a `/leaderboard` endpoint that re
 
 ## CORS Configuration
 
-If the frontend and backend are on different domains, make sure the backend API has CORS properly configured. In FastAPI, you can add:
+(Applies only to `api` mode.) If the frontend and backend are on different domains, make sure the backend API has CORS properly configured. In FastAPI, you can add:
 
 ```python
 from fastapi.middleware.cors import CORSMiddleware
@@ -115,7 +124,7 @@ app.add_middleware(
 gcloud builds submit --tag gcr.io/YOUR_PROJECT_ID/sorrydb-leaderboard-frontend
 
 # Deploy to Cloud Run
-❯ gcloud run deploy sorrydb-leaderboard-frontend --image gcr.io/sorrydb-test/sorrydb-leaderboard-frontend --platform managed --region us-central1 --allow-unauthenticated --port 80
+gcloud run deploy sorrydb-leaderboard-frontend --image gcr.io/sorrydb-test/sorrydb-leaderboard-frontend --platform managed --region us-central1 --allow-unauthenticated --port 80
 ```
 
 ### AWS / Azure / Other providers

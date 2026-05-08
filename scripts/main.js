@@ -1,4 +1,4 @@
-import { getLeaderboard, API_BASE_URL } from './api.js';
+import { getLeaderboard, API_BASE_URL, STATIC_DATA_URL, MODE } from './api.js';
 
 const REFRESH_INTERVAL = 120000;
 const state = {
@@ -29,7 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
     elements.searchInput.addEventListener('input', handleSearch);
 
     loadLeaderboard();
-    setInterval(loadLeaderboard, REFRESH_INTERVAL);
+    if (MODE !== 'static') {
+        setInterval(loadLeaderboard, REFRESH_INTERVAL);
+    }
 });
 
 async function loadLeaderboard() {
@@ -48,11 +50,14 @@ async function loadLeaderboard() {
         updateStats();
     } catch (error) {
         console.error('Error loading leaderboard:', error);
+        const source = MODE === 'static'
+            ? `Make sure ${STATIC_DATA_URL} is reachable.`
+            : `Make sure the API is running at ${API_BASE_URL}`;
         content.innerHTML = `
             <div class="error">
                 <h3>Failed to load leaderboard</h3>
                 <p>Error: ${error.message}</p>
-                <p>Make sure the API is running at ${API_BASE_URL}</p>
+                <p>${source}</p>
             </div>
         `;
     } finally {
