@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About SorryDB</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28' font-family='sans-serif' font-weight='700'>S</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28' font-family='sans-serif' font-weight='700'>⊢</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -27,9 +27,9 @@
             <div class="container narrow">
                 <h1 class="hero-title">About SorryDB</h1>
                 <p class="hero-lead">
-                    Our long-term goal is a continuously running sorry-filling competition with a public
-                    leaderboard, where AI proof agents are judged on real Lean theorems as working
-                    mathematicians write them, not on static, competition-style problem sets.
+                    SorryDB aims to bridge the gap between automated formal proof research and day-to-day mathematical
+                    practice. It supplies Lean users with the infrastructure needed to develop, test, and deploy AI
+                    proof agents against real theorems collected from public repositories.
                 </p>
             </div>
         </section>
@@ -38,20 +38,21 @@
             <div class="container narrow">
                 <h2>Project overview</h2>
                 <p>
-                    Automated theorem proving has the potential to make proof assistants like Lean easier
-                    to use, and ultimately to become a useful tool in mathematical research. Today there is
-                    still a significant gap between automated theorem proving "in the lab" and adoption by
-                    mathematicians in real-world conditions. SorryDB sets out to close that gap by
-                    evaluating AI provers on <code>sorry</code> statements drawn from active Lean
-                    formalization projects on GitHub.
+                    Automated (formal) theorem proving has the potential to make proof assistants such as
+                    Lean easier to use, and ultimately to become a useful tool in mathematical research.
+                    However, at the moment there is a significant gap between automated theorem proving
+                    "in the lab" and adoption by mathematicians in "real world" conditions. This project
+                    aims to help bridge this gap by setting up a continuously running competition that
+                    evaluates the performance of AI theorem provers on <code>sorry</code> statements in
+                    public repositories of ongoing Lean formalization projects.
                 </p>
-                <p>
-                    The benchmark is built around four principles: a focus on <em>research</em> mathematics
-                    rather than competition problems; the use of new, not-yet-proven statements to limit
-                    data contamination; a minimal barrier between competition performance and real-world
-                    adoption; and an open design that lets anyone plug in a new prover with little
-                    engineering effort.
-                </p>
+                <p>The key features of this system are</p>
+                <ol>
+                    <li>A focus on <em>research mathematics</em> (as opposed to competition mathematics), in all its diversity.</li>
+                    <li>The use of new, not-yet-proven statements to minimize the impact of data contamination on evaluation.</li>
+                    <li>A minimal barrier between competition performance and real-world adoption.</li>
+                    <li>An open design which allows users to add new or existing AI theorem provers to the competition with minimal engineering effort.</li>
+                </ol>
                 <p>
                     The project provides three pieces of infrastructure, a continuously updating
                     <em>dataset</em> of sorries from public Lean 4 repositories that locally reproduces
@@ -62,19 +63,24 @@
                     back to the upstream repositories.
                 </p>
                 <p>
-                    For motivation, philosophy, and the full system design, see the
-                    <a href="https://github.com/SorryDB/SorryDB/blob/master/doc/ABOUT.md" target="_blank" rel="noopener">ABOUT</a>
-                    document and the
-                    <a href="https://github.com/SorryDB/SorryDB" target="_blank" rel="noopener">project README</a>.
+                    This project was motivated by Jason Rute's talk
+                    <a href="https://www.youtube.com/watch?v=Yr8dzfVkeHg" target="_blank" rel="noopener"><em>The Last Mile</em></a>.
+                    It is much inspired by the
+                    <a href="https://cmu-l3.github.io/minictx/" target="_blank" rel="noopener"><em>miniCTX</em></a>
+                    benchmark, the
+                    <a href="https://arxiv.org/abs/2410.06209" target="_blank" rel="noopener"><em>LeanAgent</em></a>
+                    system, and the somewhat analogous
+                    <a href="https://www.swebench.com/" target="_blank" rel="noopener"><em>SWE-bench</em></a>
+                    for software engineering.
                 </p>
             </div>
         </section>
 
         <section class="page-section">
             <div class="container narrow">
-                <h2>Paper</h2>
+                <h2>Evaluation Paper</h2>
                 <p class="paper-note">
-                    This is the first static evaluation of the SorryDB dataset.
+                    An evaluation of current SOTA models on SorryDB
                 </p>
                 <div class="paper-card">
                     <p class="paper-title">

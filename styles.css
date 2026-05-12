@@ -164,7 +164,11 @@ code {
 /* ---------- Intro block (landing) ---------- */
 
 .intro-block {
-    padding: 4px 0 32px;
+    padding: 56px 0 32px;
+}
+
+.intro-block .hero-title {
+    text-align: center;
 }
 
 .intro-block p {
@@ -485,6 +489,31 @@ td.challenges.empty {
 
 .page-section p:last-child {
     margin-bottom: 0;
+}
+
+.page-section ol,
+.page-section ul {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin: 0 0 16px;
+    padding-left: 1.5em;
+}
+
+.page-section li + li {
+    margin-top: 6px;
+}
+
+.page-section li a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+}
+
+.page-section li a:hover,
+.page-section li a:focus-visible {
+    border-bottom-color: var(--accent);
+    outline: none;
 }
 
 .page-section p a {

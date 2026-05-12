@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SorryDB Leaderboard</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28' font-family='sans-serif' font-weight='700'>S</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28' font-family='sans-serif' font-weight='700'>⊢</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -23,21 +23,13 @@
     </header>
 
     <main>
-        <section class="hero">
-            <div class="container narrow">
-                <h1 class="hero-title">SorryDB Leaderboard</h1>
-                <p class="hero-lead">
-                    How current AI proof agents perform on real, unfinished Lean theorems.
-                </p>
-            </div>
-        </section>
-
         <section class="intro-block">
             <div class="container narrow">
+                <h1 class="hero-title">SorryDB Leaderboard</h1>
                 <p>
-                    SorryDB is a benchmark of open Lean theorems drawn from real-world formalization
-                    projects on GitHub. It lets AI proof agents be tested on <code>sorry</code> statements
-                    that working mathematicians actually need filled, rather than curated competition math sets.
+                    SorryDB is a dataset of open proof obligations drawn from real-world Lean formalization projects,
+                    designed as a benchmark for measuring the effectiveness of AI theorem provers on the kind of
+                    problems mathematicians actually work on.
                 </p>
             </div>
         </section>
@@ -77,22 +69,24 @@
             <div class="container narrow">
                 <h2>Evaluation pipeline</h2>
                 <p>
-                    The crawl and indexing steps are handled by the SorryDB infrastructure itself: we monitor
-                    active Lean 4 projects listed on
-                    <a href="https://reservoir.lean-lang.org/" target="_blank" rel="noopener">Reservoir</a>
-                    and record every open <code>sorry</code> with its repository, commit, Lean version, and
-                    source location so the task is reproducible. Each strategy then proposes a tactic string
-                    to replace a <code>sorry</code>, and an independent verifier compiles the candidate
-                    inside the original project to confirm whether the proof closes.
+                    SorryDB continuously monitors active Lean projects listed on
+                    <a href="https://reservoir.lean-lang.org/" target="_blank" rel="noopener">Reservoir</a>.
+                    For every open <code>sorry</code> it finds, it records the repository, commit, Lean
+                    version, and source location so the task can be reproduced locally.
+                </p>
+                <p>
+                    Each strategy then proposes a proof to replace the <code>sorry</code>, and an
+                    independent verifier compiles the candidate inside the original project to check
+                    whether the proof closes.
                 </p>
             </div>
         </section>
 
         <section class="page-section">
             <div class="container narrow">
-                <h2>Paper</h2>
+                <h2>Evaluation Paper</h2>
                 <p class="paper-note">
-                    This is the first static evaluation of the SorryDB dataset.
+                    An evaluation of current SOTA models on SorryDB
                 </p>
                 <div class="paper-card">
                     <p class="paper-title">
