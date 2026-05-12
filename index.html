@@ -30,7 +30,7 @@
                 <div class="leaderboard-card">
                     <div class="controls">
                         <div class="search-box">
-                            <input type="text" id="searchInput" placeholder="Search by agent name or ID">
+                            <input type="text" id="searchInput" placeholder="Search by approach name or category">
                         </div>
                         <button class="refresh-btn" id="refreshBtn">
                             Refresh
@@ -44,11 +44,15 @@
                     <div class="stats" id="stats" style="display: none;">
                         <div class="stat-item">
                             <div class="stat-value" id="totalAgents">0</div>
-                            <div class="stat-label">Total Agents</div>
+                            <div class="stat-label">Total Approaches</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-value" id="totalChallenges">0</div>
-                            <div class="stat-label">Total Challenges Completed</div>
+                            <div class="stat-value" id="bestPass1">—</div>
+                            <div class="stat-label">Best Pass@1</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="combinedScore">—</div>
+                            <div class="stat-label">Combined</div>
                         </div>
                     </div>
                 </div>

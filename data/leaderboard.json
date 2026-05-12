@@ -1,0 +1,89 @@
+{
+  "approaches": [
+    {
+      "agent_id": "trivial",
+      "agent_name": "Trivial",
+      "category": "Deterministic",
+      "pass_at_1": 2.1,
+      "pass_at_32": null
+    },
+    {
+      "agent_id": "tactics",
+      "agent_name": "Tactics",
+      "category": "Deterministic",
+      "pass_at_1": 8.4,
+      "pass_at_32": null
+    },
+    {
+      "agent_id": "gpt-5-2",
+      "agent_name": "GPT 5.2",
+      "category": "General-purpose LLM",
+      "pass_at_1": 6.2,
+      "pass_at_32": 13.2
+    },
+    {
+      "agent_id": "claude-opus-4-5",
+      "agent_name": "Claude Opus 4.5",
+      "category": "General-purpose LLM",
+      "pass_at_1": 7.8,
+      "pass_at_32": 15.4
+    },
+    {
+      "agent_id": "gemini-flash-3",
+      "agent_name": "Gemini Flash 3",
+      "category": "General-purpose LLM",
+      "pass_at_1": 10.8,
+      "pass_at_32": 20.5
+    },
+    {
+      "agent_id": "gemini-pro-3",
+      "agent_name": "Gemini Pro 3",
+      "category": "General-purpose LLM",
+      "pass_at_1": 11.0,
+      "pass_at_32": 20.5
+    },
+    {
+      "agent_id": "qwen-3",
+      "agent_name": "Qwen 3",
+      "category": "General-purpose LLM",
+      "pass_at_1": 5.0,
+      "pass_at_32": 8.1
+    },
+    {
+      "agent_id": "kimina-prover-8b",
+      "agent_name": "Kimina Prover 8B",
+      "category": "Specialized LLM",
+      "pass_at_1": 1.0,
+      "pass_at_32": 6.6
+    },
+    {
+      "agent_id": "goedel-prover-v2-32b",
+      "agent_name": "Goedel Prover V2 32B",
+      "category": "Specialized LLM",
+      "pass_at_1": 2.7,
+      "pass_at_32": 11.3
+    },
+    {
+      "agent_id": "claude-opus-4-5-sc",
+      "agent_name": "Claude Opus 4.5 (SC)",
+      "category": "Iterative",
+      "pass_at_1": 27.1,
+      "pass_at_32": null
+    },
+    {
+      "agent_id": "gemini-flash-3-sc",
+      "agent_name": "Gemini Flash 3 (SC)",
+      "category": "Iterative",
+      "pass_at_1": 27.9,
+      "pass_at_32": null
+    },
+    {
+      "agent_id": "gemini-flash-3-agentic",
+      "agent_name": "Gemini Flash 3 (agentic)",
+      "category": "Iterative",
+      "pass_at_1": 30.3,
+      "pass_at_32": null
+    }
+  ],
+  "combined": 35.7
+}

@@ -21,19 +21,23 @@ async function getStaticLeaderboard(limit) {
         throw new Error(`HTTP error ${response.status}`);
     }
 
-    const entries = await response.json();
-    const ranked = [...entries]
-        .sort((a, b) => b.completed_challenges - a.completed_challenges)
+    const data = await response.json();
+    const ranked = [...data.approaches]
+        .sort((a, b) => b.pass_at_1 - a.pass_at_1)
         .map((entry, index) => ({ ...entry, rank: index + 1 }));
 
-    return ranked.slice(0, limit);
+    return {
+        entries: ranked.slice(0, limit),
+        combined: data.combined ?? null,
+    };
 }
 
 export async function getLeaderboard(limit = 100) {
     if (MODE === 'static') {
         return getStaticLeaderboard(limit);
     }
-    return request(`/leaderboard?limit=${limit}`);
+    const entries = await request(`/leaderboard?limit=${limit}`);
+    return { entries, combined: null };
 }
 
 export { API_BASE_URL, STATIC_DATA_URL, MODE };
