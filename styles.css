@@ -322,6 +322,74 @@ td.challenges {
     line-height: 1.6;
 }
 
+.paper-card {
+    background: #ffffff;
+    border: 1px solid #d3dae4;
+    border-radius: 12px;
+    box-shadow: 0 18px 32px rgba(15, 23, 42, 0.08);
+    padding: 24px 28px;
+    margin-top: 12px;
+}
+
+.paper-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+.paper-title a {
+    color: #1f2937;
+    text-decoration: none;
+}
+
+.paper-title a:hover {
+    color: #1d4ed8;
+}
+
+.paper-authors {
+    color: #6b7280;
+    font-size: 0.875rem;
+    line-height: 1.55;
+    margin-bottom: 8px;
+}
+
+.paper-authors sup {
+    color: #2563eb;
+    font-weight: 600;
+    margin-right: 1px;
+}
+
+.paper-affiliations {
+    color: #9ca3af;
+    font-size: 0.75rem;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.paper-affiliations sup {
+    font-weight: 600;
+    margin-right: 1px;
+}
+
+.arxiv-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 18px;
+    background: #2563eb;
+    color: #ffffff;
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.arxiv-btn:hover,
+.arxiv-btn:focus {
+    background: #1d4ed8;
+}
+
 @media (max-width: 768px) {
     .nav-container {
         flex-direction: column;
