@@ -21,8 +21,8 @@ A simple, responsive HTML/JavaScript frontend for displaying the SorryDB leaderb
 
 The frontend can run in one of two modes, selected by a build-time flag:
 
-- **`static`** (default) — loads agents from `data/leaderboard.json` bundled with the site. No backend required; suitable for static hosting (GitHub Pages, plain nginx, etc.). Auto-refresh is disabled.
-- **`api`** — fetches live data from the SorryDB backend at the URL set in `scripts/api.js` (`API_BASE_URL`). Auto-refresh runs every 2 minutes.
+- **`static`** (default), loads agents from `data/leaderboard.json` bundled with the site. No backend required; suitable for static hosting (GitHub Pages, plain nginx, etc.). Auto-refresh is disabled.
+- **`api`**, fetches live data from the SorryDB backend at the URL set in `scripts/api.js` (`API_BASE_URL`). Auto-refresh runs every 2 minutes.
 
 The active mode lives in `scripts/config.js` (`export const MODE = '...'`). The Docker build rewrites this file based on the `MODE` build-arg. For local non-Docker development, edit `scripts/config.js` directly.
 
