@@ -79,7 +79,7 @@
     },
     {
       "agent_id": "gemini-flash-3-agentic",
-      "agent_name": "Gemini Flash 3 (agentic)",
+      "agent_name": "Gemini Flash 3 (Agentic)",
       "category": "Iterative",
       "pass_at_1": 30.3,
       "pass_at_32": null
