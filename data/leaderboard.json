@@ -65,21 +65,21 @@
     },
     {
       "agent_id": "claude-opus-4-5-sc",
-      "agent_name": "Claude Opus 4.5 (SC)",
+      "agent_name": "Claude Opus 4.5 (Self Correcting)",
       "category": "Iterative",
       "pass_at_1": 27.1,
       "pass_at_32": null
     },
     {
       "agent_id": "gemini-flash-3-sc",
-      "agent_name": "Gemini Flash 3 (SC)",
+      "agent_name": "Gemini Flash 3 (Self Correcting)",
       "category": "Iterative",
       "pass_at_1": 27.9,
       "pass_at_32": null
     },
     {
       "agent_id": "gemini-flash-3-agentic",
-      "agent_name": "Gemini Flash 3 (agentic)",
+      "agent_name": "Gemini Flash 3 (Agentic)",
       "category": "Iterative",
       "pass_at_1": 30.3,
       "pass_at_32": null

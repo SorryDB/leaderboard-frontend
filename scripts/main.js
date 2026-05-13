@@ -1,35 +1,30 @@
 import { getLeaderboard, API_BASE_URL, STATIC_DATA_URL, MODE } from './api.js';
 
 const REFRESH_INTERVAL = 120000;
+
+const TOOLTIPS = {
+    pass1: 'Success rate when each approach makes a single attempt per task.',
+    pass32: 'Success rate when each approach is allowed up to 32 attempts per task.',
+    tactics: 'Baseline: applies a curated list of deterministic Lean tactics (e.g., rfl, simp) directly to each goal.',
+};
+
 const state = {
-    all: [],
-    filtered: [],
+    entries: [],
     combined: null,
 };
 
 let elements = {
     content: null,
-    refreshBtn: null,
     stats: null,
-    totalAgents: null,
-    bestPass1: null,
     combinedScore: null,
-    searchInput: null,
 };
 
 document.addEventListener('DOMContentLoaded', () => {
     elements = {
         content: document.getElementById('content'),
-        refreshBtn: document.getElementById('refreshBtn'),
         stats: document.getElementById('stats'),
-        totalAgents: document.getElementById('totalAgents'),
-        bestPass1: document.getElementById('bestPass1'),
         combinedScore: document.getElementById('combinedScore'),
-        searchInput: document.getElementById('searchInput'),
     };
-
-    elements.refreshBtn.addEventListener('click', loadLeaderboard);
-    elements.searchInput.addEventListener('input', handleSearch);
 
     loadLeaderboard();
     if (MODE !== 'static') {
@@ -38,16 +33,14 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function loadLeaderboard() {
-    const { content, refreshBtn, stats } = elements;
+    const { content, stats } = elements;
 
-    refreshBtn.disabled = true;
-    content.innerHTML = '<div class="loading">Loading leaderboard...</div>';
+    content.innerHTML = '<div class="loading">Loading leaderboard…</div>';
     stats.style.display = 'none';
 
     try {
         const { entries, combined } = await getLeaderboard();
-        state.all = entries;
-        state.filtered = [...entries];
+        state.entries = entries;
         state.combined = combined;
 
         renderLeaderboard();
@@ -60,38 +53,53 @@ async function loadLeaderboard() {
         content.innerHTML = `
             <div class="error">
                 <h3>Failed to load leaderboard</h3>
-                <p>Error: ${error.message}</p>
+                <p>${error.message}</p>
                 <p>${source}</p>
             </div>
         `;
-    } finally {
-        refreshBtn.disabled = false;
     }
+}
+
+function tooltipIcon(text, { below = false, right = false, label = 'More information' } = {}) {
+    const variant = `${below ? ' tip-below' : ''}${right ? ' col-right' : ''}`;
+    return `
+        <span class="with-tooltip${variant}">
+            <span class="info-icon" tabindex="0" role="button" aria-label="${escapeHtml(label)}">i</span>
+            <span class="tooltip" role="tooltip">${escapeHtml(text)}</span>
+        </span>
+    `;
 }
 
 function renderLeaderboard() {
     const { content } = elements;
 
-    if (state.filtered.length === 0) {
+    if (state.entries.length === 0) {
         content.innerHTML = '<div class="no-results">No approaches found</div>';
         return;
     }
 
-    const rows = state.filtered.map(entry => `
-        <tr>
-            <td class="rank">
-                <span class="rank-badge ${getRankClass(entry.rank)}">
-                    ${entry.rank}
-                </span>
-            </td>
-            <td>
-                <div class="agent-name">${escapeHtml(entry.agent_name)}</div>
-                <div class="agent-id">${escapeHtml(entry.category ?? '')}</div>
-            </td>
-            <td class="challenges">${formatPercent(entry.pass_at_1)}</td>
-            <td class="challenges">${formatPercent(entry.pass_at_32)}</td>
-        </tr>
-    `).join('');
+    const rows = state.entries.map(entry => {
+        const tip = entry.agent_id === 'tactics'
+            ? ' ' + tooltipIcon(TOOLTIPS.tactics, { label: 'About the Tactics baseline' })
+            : '';
+        return `
+            <tr>
+                <td class="rank">
+                    <span class="rank-badge ${getRankClass(entry.rank)}">
+                        ${entry.rank}
+                    </span>
+                </td>
+                <td>
+                    <div class="agent-name">${escapeHtml(entry.agent_name)}${tip}</div>
+                    <div class="agent-id">${escapeHtml(entry.category ?? '')}</div>
+                </td>
+                <td class="challenges${entry.pass_at_1 == null ? ' empty' : ''}">${formatPercent(entry.pass_at_1)}</td>
+                <td class="challenges${entry.pass_at_32 == null ? ' empty' : ''}">${formatPercent(entry.pass_at_32)}</td>
+            </tr>
+        `;
+    }).join('');
+
+    const colIcon = (text, label) => tooltipIcon(text, { below: true, right: true, label });
 
     content.innerHTML = `
         <table>
@@ -99,8 +107,8 @@ function renderLeaderboard() {
                 <tr>
                     <th class="rank">Rank</th>
                     <th>Approach</th>
-                    <th class="challenges">Pass@1</th>
-                    <th class="challenges">Pass@32</th>
+                    <th class="challenges">Pass@1&nbsp;${colIcon(TOOLTIPS.pass1, 'About Pass@1')}</th>
+                    <th class="challenges">Pass@32&nbsp;${colIcon(TOOLTIPS.pass32, 'About Pass@32')}</th>
                 </tr>
             </thead>
             <tbody>${rows}</tbody>
@@ -109,27 +117,9 @@ function renderLeaderboard() {
 }
 
 function updateStats() {
-    const { stats, totalAgents, bestPass1, combinedScore } = elements;
-
-    totalAgents.textContent = state.all.length;
-    const best = state.all.reduce((max, e) => e.pass_at_1 > max ? e.pass_at_1 : max, -Infinity);
-    bestPass1.textContent = Number.isFinite(best) ? formatPercent(best) : '—';
+    const { stats, combinedScore } = elements;
     combinedScore.textContent = formatPercent(state.combined);
     stats.style.display = 'flex';
-}
-
-function handleSearch(event) {
-    const term = event.target.value.toLowerCase().trim();
-
-    state.filtered = term === ''
-        ? [...state.all]
-        : state.all.filter(entry => {
-            const name = (entry.agent_name ?? '').toLowerCase();
-            const category = (entry.category ?? '').toLowerCase();
-            return name.includes(term) || category.includes(term);
-        });
-
-    renderLeaderboard();
 }
 
 function getRankClass(rank) {
@@ -140,7 +130,7 @@ function getRankClass(rank) {
 }
 
 function formatPercent(value) {
-    if (value === null || value === undefined || Number.isNaN(value)) return '—';
+    if (value === null || value === undefined || Number.isNaN(value)) return '-';
     return `${Number(value).toFixed(1)}%`;
 }
 

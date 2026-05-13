@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About SorryDB</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28' font-family='sans-serif' font-weight='700'>⊢</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body id="top">
@@ -12,9 +15,9 @@
         <div class="container nav-container">
             <a href="index.html" class="brand">SorryDB</a>
             <nav class="primary-nav">
-                <a href="index.html#leaderboard">Leaderboard</a>
                 <a href="about.html" aria-current="page">About</a>
-                <a href="https://github.com/SorryDB/SorryDB" target="_blank" rel="noopener">Try it</a>
+                <a href="https://github.com/SorryDB/SorryDB" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://leanprover.zulipchat.com/#narrow/channel/219941-Machine-Learning-for-Theorem-Proving/topic/SorryDB.20project/with/539975666" target="_blank" rel="noopener">Zulip</a>
             </nav>
         </div>
     </header>
@@ -25,7 +28,7 @@
                 <h1 class="hero-title">About SorryDB</h1>
                 <p class="hero-lead">
                     SorryDB aims to bridge the gap between automated formal proof research and day-to-day mathematical
-                    practice. It supplies Lean 4 users with the infrastructure needed to develop, test, and deploy AI
+                    practice. It supplies Lean users with the infrastructure needed to develop, test, and deploy AI
                     proof agents against real theorems collected from public repositories.
                 </p>
             </div>
@@ -33,13 +36,59 @@
 
         <section class="page-section">
             <div class="container narrow">
-                <h2>Paper</h2>
+                <h2>Project overview</h2>
+                <p>
+                    Automated (formal) theorem proving has the potential to make proof assistants such as
+                    Lean easier to use, and ultimately to become a useful tool in mathematical research.
+                    However, at the moment there is a significant gap between automated theorem proving
+                    "in the lab" and adoption by mathematicians in "real world" conditions. This project
+                    aims to help bridge this gap by setting up a continuously running competition that
+                    evaluates the performance of AI theorem provers on <code>sorry</code> statements in
+                    public repositories of ongoing Lean formalization projects.
+                </p>
+                <p>The key features of this system are</p>
+                <ol>
+                    <li>A focus on <em>research mathematics</em> (as opposed to competition mathematics), in all its diversity.</li>
+                    <li>The use of new, not-yet-proven statements to minimize the impact of data contamination on evaluation.</li>
+                    <li>A minimal barrier between competition performance and real-world adoption.</li>
+                    <li>An open design which allows users to add new or existing AI theorem provers to the competition with minimal engineering effort.</li>
+                </ol>
+                <p>
+                    The project provides three pieces of infrastructure, a continuously updating
+                    <em>dataset</em> of sorries from public Lean 4 repositories that locally reproduces
+                    and verifies each statement; template <em>agents</em> that attempt to fill them; and
+                    an independent <em>verifier</em> that checks proposed proofs. The long-term vision is a
+                    leaderboard server that serves fresh sorries to competing clients, accepts solutions,
+                    and ranks them with an ELO-style rating, eventually opening automated pull requests
+                    back to the upstream repositories.
+                </p>
+                <p>
+                    This project was motivated by Jason Rute's talk
+                    <a href="https://www.youtube.com/watch?v=Yr8dzfVkeHg" target="_blank" rel="noopener"><em>The Last Mile</em></a>.
+                    It is much inspired by the
+                    <a href="https://cmu-l3.github.io/minictx/" target="_blank" rel="noopener"><em>miniCTX</em></a>
+                    benchmark, the
+                    <a href="https://arxiv.org/abs/2410.06209" target="_blank" rel="noopener"><em>LeanAgent</em></a>
+                    system, and the somewhat analogous
+                    <a href="https://www.swebench.com/" target="_blank" rel="noopener"><em>SWE-bench</em></a>
+                    for software engineering.
+                </p>
+            </div>
+        </section>
+
+        <section class="page-section">
+            <div class="container narrow">
+                <h2>Evaluation Paper</h2>
+                <p class="paper-note">
+                    An evaluation of current SOTA models on SorryDB
+                </p>
                 <div class="paper-card">
                     <p class="paper-title">
                         <a href="https://arxiv.org/abs/2603.02668" target="_blank" rel="noopener">
                             SorryDB: Can AI Provers Complete Real-World Lean Theorems?
                         </a>
                     </p>
+                    <span class="paper-venue">Accepted at ICML 2026</span>
                     <p class="paper-authors">
                         Austin Letson<sup>1</sup>, Leopoldo Sarra<sup>1</sup>, Auguste Poiroux<sup>3,4</sup>, Oliver Dressler,
                         Paul Lezeau<sup>5,6</sup>, Dhyan Aranha<sup>2,7</sup>, Frederick Pu<sup>10</sup>, Aaron Hill,
@@ -58,8 +107,24 @@
                         <sup>10</sup>University of Toronto &middot;
                         <sup>11</sup>The University of Texas at Austin
                     </p>
+                    <div class="paper-abstract">
+                        <span class="paper-abstract-label">Abstract</span>
+                        We present SorryDB, a dynamically-updating benchmark of open Lean tasks drawn from
+                        78 real world formalization projects on GitHub. Unlike existing static benchmarks,
+                        often composed of competition problems, hillclimbing the SorryDB benchmark will yield
+                        tools that are aligned to the community needs, more usable by mathematicians, and more
+                        capable of understanding complex dependencies. Moreover, by providing a continuously
+                        updated stream of tasks, SorryDB mitigates test-set contamination and offers a robust
+                        metric for an agent's ability to contribute to novel formal mathematics projects. We
+                        evaluate a collection of approaches, including generalist large language models,
+                        agentic approaches, and specialized symbolic provers, over a selected snapshot of
+                        1000 tasks from SorryDB. We show that current approaches are complementary: even though
+                        an agentic approach based on Gemini Flash is the most performant, it is not strictly
+                        better than other off-the-shelf large-language models, specialized provers, or even a
+                        curated list of Lean tactics.
+                    </div>
                     <a class="arxiv-btn" href="https://arxiv.org/abs/2603.02668" target="_blank" rel="noopener">
-                        Read on arXiv →
+                        Read the paper →
                     </a>
                 </div>
             </div>
@@ -67,29 +132,25 @@
 
         <section class="page-section">
             <div class="container narrow">
-                <h2>Project Overview</h2>
-                <p>
-                    At its core, SorryDB is a continuously refreshed dataset of Lean 4 <em>sorry</em> statements drawn from
-                    public projects. Each entry records the repository, commit, Lean version, and precise location of the
-                    unfinished proof so that anyone can reproduce the challenge locally. Template agents attempt to fill
-                    these proof obligations, while an independent verifier checks that proposed solutions are correct.
-                </p>
-                <p>
-                    The long-term vision is to host an always-on sorry-filling competition with a public leaderboard. For
-                    background on the motivation, philosophy, and roadmap, refer to <code>ABOUT.md</code> in the main
-                    repository.
-                </p>
-            </div>
-        </section>
-
-        <section class="page-section">
-            <div class="container narrow">
                 <h2>Resources</h2>
-                <ul class="content-list">
-                    <li><a href="https://github.com/SorryDB/SorryDB" target="_blank" rel="noreferrer">GitHub repository</a></li>
-                    <li><a href="https://leanprover.zulipchat.com/#narrow/channel/219941-Machine-Learning-for-Theorem-Proving/topic/SorryDB.20project/with/539975666" target="_blank" rel="noreferrer">Zulip discussion thread</a></li>
-                    <li><a href="https://colab.research.google.com/github/SorryDB/SorryDB/blob/master/doc/Introduction_to_the_SorryDB_Project.ipynb" target="_blank" rel="noreferrer">Introductory Google Colab notebook</a></li>
-                </ul>
+                <div class="resource-grid">
+                    <a class="resource-card" href="https://github.com/SorryDB/SorryDB" target="_blank" rel="noopener">
+                        <span class="resource-name">GitHub repository</span>
+                        <span class="resource-desc">Source code, strategies, and datasets.</span>
+                    </a>
+                    <a class="resource-card" href="https://leanprover.zulipchat.com/#narrow/channel/219941-Machine-Learning-for-Theorem-Proving/topic/SorryDB.20project/with/539975666" target="_blank" rel="noopener">
+                        <span class="resource-name">Zulip discussion</span>
+                        <span class="resource-desc">Live conversation with the SorryDB community on the Lean Zulip.</span>
+                    </a>
+                    <a class="resource-card" href="https://colab.research.google.com/github/SorryDB/SorryDB/blob/master/doc/Introduction_to_the_SorryDB_Project.ipynb" target="_blank" rel="noopener">
+                        <span class="resource-name">Google Colab notebook</span>
+                        <span class="resource-desc">Hands-on introduction to the project, run it in the browser.</span>
+                    </a>
+                    <a class="resource-card" href="https://arxiv.org/abs/2603.02668" target="_blank" rel="noopener">
+                        <span class="resource-name">Paper (arXiv)</span>
+                        <span class="resource-desc">SorryDB: Can AI Provers Complete Real-World Lean Theorems?</span>
+                    </a>
+                </div>
             </div>
         </section>
     </main>
