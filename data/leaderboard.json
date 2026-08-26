@@ -1,6 +1,14 @@
 {
   "approaches": [
     {
+      "agent_id": "aleph-prover",
+      "agent_name": "Aleph Prover",
+      "agent_url": "https://logicalintelligence.com/",
+      "category": "Proprietary",
+      "pass_at_1": 38.0,
+      "pass_at_32": null
+    },
+    {
       "agent_id": "trivial",
       "agent_name": "Trivial",
       "category": "Deterministic",
@@ -85,5 +93,5 @@
       "pass_at_32": null
     }
   ],
-  "combined": 35.7
+  "combined": 53.3
 }

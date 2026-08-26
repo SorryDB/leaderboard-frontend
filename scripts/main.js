@@ -82,6 +82,9 @@ function renderLeaderboard() {
         const tip = entry.agent_id === 'tactics'
             ? ' ' + tooltipIcon(TOOLTIPS.tactics, { label: 'About the Tactics baseline' })
             : '';
+        const name = entry.agent_url
+            ? `<a href="${escapeHtml(entry.agent_url)}" target="_blank" rel="noopener">${escapeHtml(entry.agent_name)}</a>`
+            : escapeHtml(entry.agent_name);
         return `
             <tr>
                 <td class="rank">
@@ -90,7 +93,7 @@ function renderLeaderboard() {
                     </span>
                 </td>
                 <td>
-                    <div class="agent-name">${escapeHtml(entry.agent_name)}${tip}</div>
+                    <div class="agent-name">${name}${tip}</div>
                     <div class="agent-id">${escapeHtml(entry.category ?? '')}</div>
                 </td>
                 <td class="challenges${entry.pass_at_1 == null ? ' empty' : ''}">${formatPercent(entry.pass_at_1)}</td>
