@@ -5,7 +5,7 @@
       "agent_name": "Aleph Prover",
       "agent_url": "https://logicalintelligence.com/",
       "category": "Proprietary",
-      "pass_at_1": 38.0,
+      "pass_at_1": 57.2,
       "pass_at_32": null
     },
     {
@@ -93,5 +93,5 @@
       "pass_at_32": null
     }
   ],
-  "combined": 53.3
+  "combined": 63.2
 }
